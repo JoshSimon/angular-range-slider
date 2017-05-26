@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { NouisliderModule } from 'ng2-nouislider';
+import { NouisliderComponent } from 'ng2-nouislider';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NouisliderComponent
   ],
 
   imports: [
     BrowserModule,
     FormsModule,
-    NouisliderModule
+
   ],
 
   providers: [],

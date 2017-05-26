@@ -1,14 +1,17 @@
-<nouislider [min]="someMin" [max]="someMax" [step]="0.05" [(ngModel)]="someValue" (ngModelChange)="onChange($event)" [disabled]="disabled"></nouislider>
+<div class="container-fluid">
+  <div class="left-input-div">
+    <input class="left-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[0]"
+    [(ngModel)]="someValue[0]" step="0.1" (change)="changeValue0($event.target.value)">
+  </div>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(1)">+1</button>
+  <div class="slider">
+    <nouislider  id="slider" [config]="someKeyboardConfig" [(ngModel)]="someValue" 
+    (change)="onChange($event)" [disabled]="disabled"></nouislider>
+  </div>
+  <div class="right-input-div">
+    <input class="right-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[1]" 
+    [(ngModel)]="someValue[1]">
+  </div>
 </div>
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMin(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMin(1)">+1</button>
-</div>
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMax(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMax(1)">+1</button>
-</div>
+
+<p> {{someValue || json }}</p>
