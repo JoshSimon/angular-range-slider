@@ -1,22 +1,11 @@
 <div class="container-fluid">
-  <!--<div class="left-input-div">
-    <input class="left-input" type="number" [value]="someValue(0)" [(ngModel)]="someValue" step="0.1" (change)="changeValue0($event.target.value)">
-  </div>
-
-  <div class="slider">
-    <nouislider id="slider" [min]="someMin" [max]="someMax" [config]="someKeyboardConfig" [(ngModel)]="someValue" (change)="onChange($event)"
-      [disabled]="disabled"></nouislider>
-  </div>
-  <div class="right-input-div">
-    <input class="right-input" type="number" value="someValue(1)" [(ngModel)]="someValue">
-  </div>-->
   <form class="form-horizontal">
     <div class="form-group">
       <div class="col-sm-2">
         <input class="form-control" [min]="someMin" [max]="someMax" name="min" [(ngModel)]="someValue[0]" type="number" (change)="onChange0(someValue)" (input)="onChange0(someValue)">
       </div>
       <div class="col-sm-8">
-        <nouislider #slider [connect]="true" name="slider" id="slider" [min]="someMin" [max]="someMax" [config]="someKeyboardConfig" [(ngModel)]="someValue"
+        <nouislider [connect]="true" name="slider" id="slider" [min]="someMin" [max]="someMax" [config]="someKeyboardConfig" [(ngModel)]="someValue"
           (change)="onChange($event)" [disabled]="disabled"></nouislider>
       </div>
       <div class="col-sm-2">
