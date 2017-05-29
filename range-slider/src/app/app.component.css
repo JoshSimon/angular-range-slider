@@ -1,0 +1,29 @@
+.left-input-div {
+    width:10%; 
+    float:left
+}
+
+.left-input {
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px
+}
+
+.right-input-div {
+    width:10%; 
+    float:right
+}
+
+.right-input {
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px
+
+}
+
+.slider {
+    width: 80%;
+    float: left
+}
+
+

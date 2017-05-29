@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="left-input-div">
+    <input class="left-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[0]"
+    [(ngModel)]="someValue[0]" step="0.1" (change)="changeValue0($event.target.value)">
+  </div>
+
+  <div class="slider">
+    <nouislider  id="slider" [config]="someKeyboardConfig" [(ngModel)]="someValue" 
+    (change)="onChange($event)" [disabled]="disabled"></nouislider>
+  </div>
+  <div class="right-input-div">
+    <input class="right-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[1]" 
+    [(ngModel)]="someValue[1]">
+  </div>
+</div>
+
+<p> {{someValue || json }}</p>
