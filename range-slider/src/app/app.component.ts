@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { NouisliderComponent } from 'ng2-nouislider';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,20 @@ export class AppComponent {
   public someMin: number = -10;
   public someMax: number = 10;
 
+  @ViewChild('slider') slider: NouisliderComponent;
+
   onChange(value: any) {
     console.log('Value changed to', value);
+    this.someValue = [value[0], this.someValue[1]];
+  }
+
+  onChange0(value: any) {
+    console.log('Value changed to', value);
+    this.someValue = [value[0], this.someValue[1]];
+  }
+  onChange1(value: any) {
+    console.log('Value changed to', value);
+    this.someValue = [this.someValue[0], value[1]];
   }
 
   changeValue0(input: number) {
