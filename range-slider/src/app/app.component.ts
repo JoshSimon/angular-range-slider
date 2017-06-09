@@ -14,27 +14,39 @@ export class AppComponent {
 
   @ViewChild('slider') slider: NouisliderComponent;
 
+/**
+ * UPDATE THE SLIDER VALUES BY USER INTERACTION
+ */
+
+/**
+ * SLIDER DRAG INTERACTION
+ * @param value value of the build in event emitter of the NouisliderComponent
+ */
   onChange(value: any) {
     console.log('Value changed to', value);
-    this.someValue = [value[0], this.someValue[1]];
+    this.someValue = [value[0], value[1]];
   }
 
+/**
+ * INPUT INTERACTION
+ * @param value set by the user in the input
+ * here the start
+ */
   onChange0(value: any) {
     console.log('Value changed to', value);
-    this.someValue = [value[0], this.someValue[1]];
+    this.someValue = [value, this.someValue[1]];
   }
+  /**
+ * INPUT INTERACTION
+ * @param value set by the user in the input
+ * here the end
+ */
   onChange1(value: any) {
     console.log('Value changed to', value);
     this.someValue = [this.someValue[0], value[1]];
   }
 
-  changeValue0(input: number) {
-    let slider = document.getElementById('slider');
-    this.someValue[0] = Number(input);
-    console.log('Changed value to: ' + input + this.someValue[0]);
-    console.log(this.someValue)
-    return this.someValue[0];
-  }
+
 
   public someKeyboardConfig: any = {
     behaviour: 'drag',
@@ -49,8 +61,8 @@ export class AppComponent {
     },
     pips: {
       mode: 'count',
-      density: 2,
-      values: 6,
+      density: 1,
+      values: 20,
       stepped: true
     }
   };
