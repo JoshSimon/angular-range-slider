@@ -3,8 +3,8 @@
     <div class="form-group form-horizontal row">
       <div class="col-sm-2">
         <input 
-          name="min" formControlName="min" 
-          [class.invalid]="!sliderForm.controls['min'].valid && sliderForm.controls['min'].touched" 
+          name="min" formControlName="range0" 
+          [class.invalid]="!sliderForm.controls['range0'].valid && sliderForm.controls['range0'].touched" 
           class="form-control"
 
           [min]="sliderMin"
@@ -12,9 +12,9 @@
           type="number" 
           
           [(value)]="sliderRange[0]" 
-          (change)="onChange0(sliderForm.value.min)"
+          (change)="onChange0(sliderForm.value.range0)"
           >
-        <div *ngIf="!sliderForm.controls['min'].valid && sliderForm.controls['min'].touched">
+        <div *ngIf="!sliderForm.controls['range0'].valid && sliderForm.controls['range0'].touched">
           <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
         </div>
       </div>
@@ -33,8 +33,8 @@
       </div>
       <div class="col-sm-2">
         <input 
-        name="max" formControlName="max"
-        [class.invalid]="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched"
+        name="max" formControlName="range1"
+        [class.invalid]="!sliderForm.controls['range1'].valid && sliderForm.controls['range1'].touched"
         class="form-control"  
         
         [min]="sliderMin"
@@ -42,9 +42,9 @@
         type="number"  
         
         [(value)]="sliderRange[1]"   
-        (change)="onChange1(sliderForm.value.max)"
+        (change)="onChange1(sliderForm.value.range1)"
         >
-        <div *ngIf="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched">
+        <div *ngIf="!sliderForm.controls['range1'].valid && sliderForm.controls['range1'].touched">
           <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
         </div>
       </div>
@@ -52,4 +52,4 @@
   </form>
 </div>
 
-<p> {{sliderRange | json }} </p>
+<p> {{sliderForm.value.range | json }} </p>
