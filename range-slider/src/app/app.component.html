@@ -1,22 +1,55 @@
 <div class="container-fluid">
-  <form  [formGroup]="sliderForm">
+  <form [formGroup]="sliderForm">
     <div class="form-group form-horizontal row">
       <div class="col-sm-2">
-              <input class="form-control" [min]="sliderMin" [max]="sliderMax" 
-              formControlName="min" type="number" name="min"(change)="onChange0(sliderRange[0])"
-          (input)="onChange0(sliderRange[0])">
+        <input 
+          name="min" formControlName="min" 
+          [class.invalid]="!sliderForm.controls['min'].valid && sliderForm.controls['min'].touched" 
+          class="form-control"
+
+          [min]="sliderMin"
+          [max]="sliderMax" 
+          type="number" 
+          
+          [(value)]="sliderRange[0]" 
+          (change)="onChange0(sliderForm.value.min)"
+          >
+        <div *ngIf="!sliderForm.controls['min'].valid && sliderForm.controls['min'].touched">
+          <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
+        </div>
       </div>
       <div class="col-sm-8">
-        <nouislider [connect]="true" name="slider" id="slider" [config]="someKeyboardConfig" formControlName="sliderRange"
-          (change)="onChange($event)" [disabled]="disabled"></nouislider>
+
+        
+        <nouislider 
+        [connect]="true" 
+        [config]="someKeyboardConfig"
+        name="slider" id="slider"  
+        (change)="onChange($event)"
+        formControlName="range"
+         [disabled]="disabled" ></nouislider>
+
+
       </div>
       <div class="col-sm-2">
-        <input class="form-control" [class.invalid]="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched" [min]="sliderMin" [max]="sliderMax"  name="max"formControlName="max"  type="number" (change)="onChange1(sliderRange)"
-          (input)="onChange1(sliderRange)">
-          <div *ngIf="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched">
-            <p>Please set a value that inside the predefined bound</p>
-          </div>
+        <input 
+        name="max" formControlName="max"
+        [class.invalid]="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched"
+        class="form-control"  
+        
+        [min]="sliderMin"
+        [max]="sliderMax"
+        type="number"  
+        
+        [(value)]="sliderRange[1]"   
+        (change)="onChange1(sliderForm.value.max)"
+        >
+        <div *ngIf="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched">
+          <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
+        </div>
       </div>
     </div>
   </form>
 </div>
+
+<p> {{sliderRange | json }} </p>

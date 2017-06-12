@@ -27,5 +27,9 @@
 }
 
 .invalid {
-    border-color: red
+    border-color: #ebccd1;
+}
+
+.space-above {
+    margin-top: 20px;
 }

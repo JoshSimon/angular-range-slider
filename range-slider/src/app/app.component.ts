@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 /** 
  * FORM RELATED
  */
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 /**
@@ -52,7 +52,7 @@ export class AppComponent {
   /**
    * SLIDER VALUES
    */
-  private sliderRange: [number]
+  private sliderRange: [number];
 
   /**
    * FORM
@@ -89,9 +89,12 @@ export class AppComponent {
    * SLIDER DRAG INTERACTION
    * @param value value of the build in event emitter of the NouisliderComponent
    */
-  onChange(value: any) {
-    console.log('Value changed to', value);
-    this.sliderRange = [value[0], value[1]];
+  onChange(value: [number]) {
+    const formControlOfTheInput0 = <FormControl>this.sliderForm.controls['min'];
+     formControlOfTheInput0.setValue(value[0]);
+     const formControlOfTheInput1 = <FormControl>this.sliderForm.controls['max'];
+     formControlOfTheInput1.setValue(value[1])
+    
   }
 
   /**
@@ -99,18 +102,25 @@ export class AppComponent {
    * @param value set by the user in the input
    * here the start
    */
-  onChange0(value: any) {
-    console.log('Value changed to', value);
-    this.sliderRange = [value, this.sliderRange[1]];
-  }
+  onChange0(value: number) {
+      const formControlOfTheSlider = <FormControl>this.sliderForm.controls['range'];
+    let newRange = formControlOfTheSlider.value;
+    newRange = [value, newRange[1]]
+    formControlOfTheSlider.setValue(newRange);
+     console.log('The new values have been set to the formControlOfTheSlider' + '['+formControlOfTheSlider.value[0]+ '|' +formControlOfTheSlider.value[1]+']')
+}
+
   /**
  * INPUT INTERACTION
  * @param value set by the user in the input
  * here the end
  */
-  onChange1(value: any) {
-    console.log('Value changed to', value);
-    this.sliderRange = [this.sliderRange[0], value[1]];
+  onChange1(value:number) {
+      const formControlOfTheSlider = <FormControl>this.sliderForm.controls['range'];
+    let newRange = formControlOfTheSlider.value;
+    newRange = [ newRange[0], value]
+    formControlOfTheSlider.setValue(newRange);
+     console.log('The new values have been set to the formControlOfTheSlider' + '['+formControlOfTheSlider.value[0]+ '|' +formControlOfTheSlider.value[1]+']')
   }
   /**
   * CONFIGURATION of the <nouislider> element
@@ -119,7 +129,7 @@ export class AppComponent {
     this.someKeyboardConfig = {
       behaviour: 'drag',
       connect: true,
-      start: [0, 5],
+      start: this.sliderRange,
       keyboard: true,  // same as [keyboard]="true"
       step: 0.1,
       pageSteps: 10,  // number of page steps, defaults to 10
@@ -130,7 +140,7 @@ export class AppComponent {
       pips: {
         mode: 'count',
         density: 1,
-        values: 20,
+        values: 10,
         stepped: true
       }
     }
@@ -143,8 +153,8 @@ export class AppComponent {
     this.sliderForm = this.fb.group({
       min: [ this.sliderMin, Validators.compose([Validators.required, Validators.min(this.sliderMin), Validators.max(this.sliderMax)])],
       max: [this.sliderMax, Validators.compose([Validators.required, Validators.min(this.sliderMin), Validators.max(this.sliderMax)])],
-      sliderRange: [this.sliderRange]
-    })
+      range: [this.sliderRange]
+  })
   }
 
 }
