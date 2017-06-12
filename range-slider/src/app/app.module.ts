@@ -1,24 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
 import { NouisliderComponent } from 'ng2-nouislider';
+import { RangeSliderDefaultDataService } from './range-slider-default-data.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     NouisliderComponent
   ],
 
   imports: [
     BrowserModule,
-    FormsModule,
-
+    ReactiveFormsModule
   ],
 
-  providers: [],
+  providers: [RangeSliderDefaultDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

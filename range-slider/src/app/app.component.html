@@ -1,21 +1,22 @@
 <div class="container-fluid">
-  <form class="form-horizontal">
-    <div class="form-group row">
-   
+  <form  [formGroup]="sliderForm">
+    <div class="form-group form-horizontal row">
       <div class="col-sm-2">
-        <input class="form-control" [min]="someMin" [max]="someMax" 
-        name="min" [(ngModel)]="someValue[0]" type="number" 
-        (change)="onChange0(someValue[0])" (input)="onChange0(someValue[0])">
+              <input class="form-control" [min]="sliderMin" [max]="sliderMax" 
+              formControlName="min" type="number" name="min"(change)="onChange0(sliderRange[0])"
+          (input)="onChange0(sliderRange[0])">
       </div>
       <div class="col-sm-8">
-        <nouislider [connect]="true" name="slider" id="slider" [min]="someMin" [max]="someMax" 
-        [config]="someKeyboardConfig" [(ngModel)]="someValue"
+        <nouislider [connect]="true" name="slider" id="slider" [config]="someKeyboardConfig" formControlName="sliderRange"
           (change)="onChange($event)" [disabled]="disabled"></nouislider>
       </div>
       <div class="col-sm-2">
-        <input class="form-control" [min]="someMin" [max]="someMax" name="max" [(ngModel)]="someValue[1]" type="number" (change)="onChange1(someValue)" (input)="onChange1(someValue)">
+        <input class="form-control" [class.invalid]="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched" [min]="sliderMin" [max]="sliderMax"  name="max"formControlName="max"  type="number" (change)="onChange1(sliderRange)"
+          (input)="onChange1(sliderRange)">
+          <div *ngIf="!sliderForm.controls['max'].valid && sliderForm.controls['max'].touched">
+            <p>Please set a value that inside the predefined bound</p>
+          </div>
       </div>
     </div>
   </form>
-  <p> {{someValue | json }}</p>
 </div>

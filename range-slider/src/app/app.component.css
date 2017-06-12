@@ -26,4 +26,6 @@
     float: left
 }
 
-
+.invalid {
+    border-color: red
+}
