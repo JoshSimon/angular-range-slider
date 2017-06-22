@@ -73,9 +73,7 @@ export class AppComponent {
     this.startValueRange = service.getDefaultRange();
     this.sliderMin = service.getDefaultMin();
     this.sliderMax = service.getDefaultMax();
-    console.log('min ' + this.sliderMin + ' max ' + this.sliderMax);
     this.sliderRange = this.startValueRange;
-    console.log(this.sliderRange[1])
     this.configureNouislider();
     this.createForm();
   }
@@ -91,52 +89,47 @@ export class AppComponent {
    */
   onChange(value: [number]) {
     const formControlOfTheInput0 =
-      <FormControl>this.sliderForm.controls['range0'];
+      <FormControl>this.sliderForm.controls['left'];
     formControlOfTheInput0.setValue(value[0]);
-    const formControlOfTheInput1 = 
-      <FormControl>this.sliderForm.controls['range1'];
+    const formControlOfTheInput1 =
+      <FormControl>this.sliderForm.controls['right'];
     formControlOfTheInput1.setValue(value[1])
+  }
+
+/**
+  * INPUT INTERACTION
+  * @param value set by the user in the input
+  * here the leftt side
+  */
+  onChangeLeft(value: number) {
+    // get the current range
+    const formControlOfTheSlider =
+      <FormControl>this.sliderForm.controls['range'];
+    let newRange = formControlOfTheSlider.value;
+    // only if the value is smaller than the right one, the range will be overwritten
+    if (value <= newRange[1]) {
+      newRange = [value, newRange[1]];
+      formControlOfTheSlider.setValue(newRange);
+    }
   }
 
   /**
    * INPUT INTERACTION
    * @param value set by the user in the input
-   * here the start
+   * here the right side
    */
-  onChange0(value: number) {
-    const formControlOfTheSlider = 
-    <FormControl>this.sliderForm.controls['range'];
+  onChangeRight(value: number) {
+    const formControlOfTheSlider =
+      <FormControl>this.sliderForm.controls['range'];
     let newRange = formControlOfTheSlider.value;
-    newRange = [value, newRange[1]]
-    if(value >= newRange[1]){
-      console.log('Match')
-      newRange = [value, value];
-      const formControlOfTheInput1 = 
-      <FormControl>this.sliderForm.controls['range1'];
-       formControlOfTheInput1.setValue(value);
+    if (value >= newRange[0]) {
+      newRange = [value, newRange[1]]
+      formControlOfTheSlider.setValue(newRange);
+    
     }
-    formControlOfTheSlider.setValue(newRange);
+
   }
 
-  /**
- * INPUT INTERACTION
- * @param value set by the user in the input
- * here the end
- */
-  onChange1(value: number) {
-    const formControlOfTheSlider = 
-    <FormControl>this.sliderForm.controls['range'];
-    let newRange = formControlOfTheSlider.value;
-    newRange = [newRange[0], value]
-     if(value <= newRange[0]){
-      console.log('Match')
-      newRange = [value, value];
-      const formControlOfTheInput0 = 
-      <FormControl>this.sliderForm.controls['range0'];
-       formControlOfTheInput0.setValue(value);
-    }
-    formControlOfTheSlider.setValue(newRange);
-  }
   /**
   * CONFIGURATION of the <nouislider> element
   */
@@ -166,8 +159,8 @@ export class AppComponent {
    */
   createForm() {
     this.sliderForm = this.fb.group({
-      range0: [this.sliderMin, Validators.compose([Validators.required, Validators.min(this.sliderMin), Validators.max(this.sliderMax)])],
-      range1: [this.sliderMax, Validators.compose([Validators.required, Validators.min(this.sliderMin), Validators.max(this.sliderMax)])],
+      left: [this.sliderMin, Validators.compose([Validators.required, Validators.min(this.sliderMin)])],
+      right: [this.sliderMax, Validators.compose([Validators.required, Validators.max(this.sliderMax)])],
       range: [this.sliderRange]
     })
   }

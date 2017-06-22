@@ -3,18 +3,18 @@
     <div class="form-group form-horizontal row">
       <div class="col-sm-2">
         <input 
-          name="min" formControlName="range0" 
-          [class.invalid]="!sliderForm.controls['range0'].valid && sliderForm.controls['range0'].touched" 
+          name="min" formControlName="left" 
+          [class.invalid]="!sliderForm.controls['left'].valid && sliderForm.controls['left'].touched" 
           class="form-control"
 
           [min]="sliderMin"
-          [max]="sliderMax" 
+          [max]="sliderForm.value.right" 
           type="number" 
           
           [(value)]="sliderRange[0]" 
-          (change)="onChange0(sliderForm.value.range0)"
+          (change)="onChangeLeft(sliderForm.value.left)"
           >
-        <div *ngIf="!sliderForm.controls['range0'].valid && sliderForm.controls['range0'].touched">
+        <div *ngIf="!sliderForm.controls['left'].valid && sliderForm.controls['left'].touched">
           <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
         </div>
       </div>
@@ -33,18 +33,18 @@
       </div>
       <div class="col-sm-2">
         <input 
-        name="max" formControlName="range1"
-        [class.invalid]="!sliderForm.controls['range1'].valid && sliderForm.controls['range1'].touched"
+        name="max" formControlName="right"
+        [class.invalid]="!sliderForm.controls['right'].valid && sliderForm.controls['right'].touched"
         class="form-control"  
         
-        [min]="sliderMin"
+        [min]="sliderForm.value.left"
         [max]="sliderMax"
         type="number"  
         
         [(value)]="sliderRange[1]"   
-        (change)="onChange1(sliderForm.value.range1)"
+        (change)="onChangeRight(sliderForm.value.right)"
         >
-        <div *ngIf="!sliderForm.controls['range1'].valid && sliderForm.controls['range1'].touched">
+       <div *ngIf="!sliderForm.controls['right'].valid && sliderForm.controls['right'].touched">
           <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
         </div>
       </div>
