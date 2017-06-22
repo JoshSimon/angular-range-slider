@@ -1,17 +1,55 @@
 <div class="container-fluid">
-  <div class="left-input-div">
-    <input class="left-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[0]"
-    [(ngModel)]="someValue[0]" step="0.1" (change)="changeValue0($event.target.value)">
-  </div>
+  <form [formGroup]="sliderForm">
+    <div class="form-group form-horizontal row">
+      <div class="col-sm-2">
+        <input 
+          name="min" formControlName="left" 
+          [class.invalid]="!sliderForm.controls['left'].valid && sliderForm.controls['left'].touched" 
+          class="form-control"
 
-  <div class="slider">
-    <nouislider  id="slider" [config]="someKeyboardConfig" [(ngModel)]="someValue" 
-    (change)="onChange($event)" [disabled]="disabled"></nouislider>
-  </div>
-  <div class="right-input-div">
-    <input class="right-input" type="number" [min]="someMin" [max]="someMax" [value]="someValue[1]" 
-    [(ngModel)]="someValue[1]">
-  </div>
+          [min]="sliderMin"
+          [max]="sliderForm.value.right" 
+          type="number" 
+          
+          [(value)]="sliderRange[0]" 
+          (change)="onChangeLeft(sliderForm.value.left)"
+          >
+        <div *ngIf="!sliderForm.controls['left'].valid && sliderForm.controls['left'].touched">
+          <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+
+        
+        <nouislider 
+        [connect]="true" 
+        [config]="someKeyboardConfig"
+        name="slider" id="slider"  
+        (change)="onChange($event)"
+        formControlName="range"
+         [disabled]="disabled" ></nouislider>
+
+
+      </div>
+      <div class="col-sm-2">
+        <input 
+        name="max" formControlName="right"
+        [class.invalid]="!sliderForm.controls['right'].valid && sliderForm.controls['right'].touched"
+        class="form-control"  
+        
+        [min]="sliderForm.value.left"
+        [max]="sliderMax"
+        type="number"  
+        
+        [(value)]="sliderRange[1]"   
+        (change)="onChangeRight(sliderForm.value.right)"
+        >
+       <div *ngIf="!sliderForm.controls['right'].valid && sliderForm.controls['right'].touched">
+          <div class="alert alert-danger space-above">Please set a value that inside the predefined bound</div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 
-<p> {{someValue || json }}</p>
+<p> {{sliderForm.value.range | json }} </p>

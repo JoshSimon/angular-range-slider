@@ -26,4 +26,10 @@
     float: left
 }
 
+.invalid {
+    border-color: #ebccd1;
+}
 
+.space-above {
+    margin-top: 20px;
+}
